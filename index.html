@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="موقع تاكيد الحجز جامعة برج العرب التكنولوجية">
+    <meta name="keywords" content="تأكيد الحجز، جامعة برج العرب، تكنولوجيا، الكود">
+    <meta name="author" content="Mostafa Mohamed Hosny">
+    <title>موقع تاكيد الحجز جامعة برج العرب التكنولوجية</title>
+    <!-- إضافة ملفات CSS المصغرة -->
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="style.min.css?v=<?php echo time(); ?>" />
+    
+    <!-- إضافة ملفات JS المصغرة مع defer لتحسين الأداء -->
+    <script src="main.js?v=<?php echo time(); ?>" defer></script>
+    <script src="script.js" defer></script>
+
+    <style>
+        /* CSS متجاوب لضمان التوافق مع الأجهزة المحمولة */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .form-container {
+                width: 100%;
+                padding: 10px;
+            }
+            input[type="text"], button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <footer>
+        <p>&copy; 2024 Website created by <a href="https://www.facebook.com/tata.hosny.7">Mostafa Mohamed Hosny</a></p>
+    </footer>
+
+    <div class="background"></div> <!-- الصورة الخلفية المتحركة -->
+
+    <div class="top-nav">
+        <div class="menu-icon" onclick="toggleDropdown(this)">
+            &#9776; <!-- الأيقونة الثلاثية -->
+        </div>
+        <div class="dropdown-content" id="dropdownMenu">
+            <a href="https://batechu.com/" class="menu-item">موقع الجامعة</a>
+            <a class="nav-link" href="login.html">admin</a>
+            <a href="javascript:void(1)" class="menu-item" onclick="toggleSupportInfo()">الدعم الفني</a>
+            <div class="support-info" id="supportInfo">
+                <p>رقم الهاتف:01555973628</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <img src="logo.png" alt="شعار جامعة برج العرب للتكنولوجيا" class="logo" loading="lazy">
+        <p>تحقق من الكود</p>
+        <form id="verificationForm" action="#" onsubmit="checkWords(event)">
+            <input type="text" placeholder="أدخل الكود الذي استلمته" id="inputWords" required>
+            <input type="text" placeholder="أدخل اسمك الثلاثي" id="userName" required>
+            <button type="submit">تحقق</button>
+        </form>
+    </div>
+
+    <div id="overlay" class="overlay" style="display: none;"></div>
+
+    <div id="successMessage" class="success-message" style="display: none;">
+        <div class="message-content">
+            <span class="check-icon">✔️</span>
+            <p>تم إرسال الاسم بنجاح</p>
+            <p id="groupLinkContainer" style="display: none;">
+                <span>رابط المجموعة الخاصة بك: </span>
+                <a id="groupLink" href="#" target="_blank">انضم إلى مجموعتك</a>
+            </p>
+            <button onclick="closeMessage()">حسناً</button>
+        </div>
+    </div>
+
+    <div id="errorMessage" class="error-message" style="display: none;">
+        <div class="message-content">
+            <span class="error-icon">❌</span>
+            <p>حدث خطأ في البيانات المدخلة، يرجى المحاولة مرة أخرى</p>
+            <button onclick="closeMessage()">حسناً</button>
+        </div>
+    </div>
+
+    <script>
+        // التحقق من البيانات قبل إرسالها
+        function checkWords(event) {
+            event.preventDefault(); 
+
+            const userName = document.getElementById("userName").value.trim();
+            const inputWord = document.getElementById("inputWords").value.trim();
+
+            if (!userName || !inputWord) {
+                alert("يرجى ملء جميع الحقول.");
+                return;
+            }
+
+            fetch('check_code.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    userName: userName,
+                    inputWord: inputWord,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    showSuccessMessage(data.groupLink);
+                } else {
+                    showErrorMessage();
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                showErrorMessage();
+            });
+        }
+
+        // عرض رسالة النجاح
+        function showSuccessMessage(groupLink) {
+            document.getElementById('overlay').style.display = "block";
+            document.getElementById('successMessage').style.display = "block";
+            document.getElementById('errorMessage').style.display = "none";
+            document.querySelector('.check-icon').classList.add('draw');
+            
+            if (groupLink) {
+                document.getElementById('groupLinkContainer').style.display = "block";
+                document.getElementById('groupLink').href = groupLink;
+            }
+        }
+
+        // عرض رسالة الخطأ
+        function showErrorMessage() {
+            document.getElementById('overlay').style.display = "block";
+            document.getElementById('errorMessage').style.display = "block";
+            document.getElementById('successMessage').style.display = "none";
+            document.querySelector('.error-icon').classList.add('draw');
+        }
+
+        // إغلاق الرسائل
+        function closeMessage() {
+            document.getElementById('overlay').style.display = "none";
+            document.getElementById('successMessage').style.display = "none";
+            document.getElementById('errorMessage').style.display = "none";
+            document.querySelector('.check-icon').classList.remove('draw');
+            document.querySelector('.error-icon').classList.remove('draw');
+        }
+
+        // إظهار معلومات الدعم الفني
+        function toggleSupportInfo() {
+            const supportInfo = document.getElementById('supportInfo');
+            supportInfo.style.display = (supportInfo.style.display === "block") ? "none" : "block";
+        }
+
+        // إظهار أو إخفاء القائمة المنسدلة
+        function toggleDropdown(icon) {
+            icon.classList.toggle('open');
+            document.getElementById('dropdownMenu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #b3e0ff, #80ccff); /* خلفية تدرج باللون الأزرق الفاتح */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow-x: hidden; /* لضمان عدم تجاوز المحتوى */
+}
+
+/* إضافة صورة خلفية متحركة مع تأثير البلور */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('OIP.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; 
+    filter: blur(8px); 
+    z-index: -1; 
+    animation: moveBackground 40s infinite linear; 
+  }
+  
+  @keyframes moveBackground {
+    0% {
+      background-position: center;
+    }
+    50% {
+      background-position: left top;
+    }
+    100% {
+      background-position: center;
+    }
+
+  }
+
+
+/* تسريع الحركة على الشاشات الكبيرة */
+@media (min-width: 1024px) {
+    .background {
+        animation: moveBackground 15s infinite linear; /* سرعة أسرع للـ PC */
+    }
+}
+ 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+/* قائمة العناوين في الأعلى */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.8); /* خلفية شفافة قليلاً للقائمة */
+    padding: 10px;
+    text-align: left;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.menu-icon {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+/* القائمة المنسدلة المخفية بشكل افتراضي */
+.dropdown-content {
+    display: none; /* مخفية بشكل افتراضي */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* عند تفعيل الفئة show، يتم عرض القائمة */
+.dropdown-content.show {
+    display: block; /* تظهر عندما تحتوي على فئة 'show' */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+
+/* تغيير الأيقونة عند فتح القائمة */
+.menu-icon.open {
+    transform: rotate(90deg); /* يمكن إضافة تغيير الأيقونة هنا */
+}
+
+.show {
+    display: block;
+}
+
+
+/* نموذج التحقق */
+.container {
+    background-color: #ffffff; /* خلفية بيضاء للنموذج */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 80px; /* لتجنب التصاق النموذج بالقائمة العلوية */
+}
+
+.logo {
+    width: 250px; /* عرض الشعار */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #4caf50; /* اللون الأخضر من الشعار */
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #4caf50; /* اللون الأخضر من الشعار */
+    font-size: 18px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    background-color: #4caf50; /* اللون الأخضر من الشعار */
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #45a049; /* تغيير اللون عند المرور على الزر */
+}
+
+/* أسفل الصفحة */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.8); /* 0.8 تعني شفافية 80% */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #f1f1f1;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #b3e0ff, #80ccff); /* خلفية تدرج باللون الأزرق الفاتح */
+    margin: 0;body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #b3e0ff, #80ccff); /* خلفية تدرج باللون الأزرق الفاتح */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column; /* جعل المحتوى عموديًا */
+    }
+    
+    /* الخلفية المتحركة */
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('OIP.png'); /* هنا قم بإدراج رابط الصورة الخاصة بك */
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed; /* لجعل الصورة ثابتة عند التمرير */
+        filter: blur(8px); /* إضافة تأثير البلور */
+        z-index: -1; /* وضع الصورة خلف المحتوى */
+        animation: moveBackground 10s infinite linear; /* أنميشن لتحريك الصورة */
+    }
+    
+    /* أنميشن لتحريك الخلفية */
+    @keyframes moveBackground {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 100% 100%;
+        }
+    }
+    
+    /* قائمة العناوين في الأعلى */
+    .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(51, 51, 51, 0.8); /* خلفية شفافة قليلاً للقائمة */
+        padding: 10px;
+        text-align: left;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .menu-icon {
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    /* قائمة الخيارات */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background-color: #f9f9f9;
+        width: 200px; /* عرض القامة مناسب */
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        text-align: center;
+        transition: all 0.3s ease;
+        padding: 10px 0; /* تحسين المسافات بين العناصر */
+        border-radius: 8px;
+    }
+    
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 15px; /* تحسين المسافات داخل الروابط */
+        text-decoration: none;
+        display: block;
+        font-size: 18px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #ddd;
+        transform: translateY(-5px); /* تحريك الرابط عند التمرير عليه */
+    }
+    
+    .show-dropdown {
+        display: block;
+    }
+    
+    /* نموذج التحقق */
+    .container {
+        background-color: #ffffff; /* خلفية بيضاء للنموذج */
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+        margin-top: 80px; /* لتجنب التصاق النموذج بالقائمة العلوية */
+    }
+    
+    .logo {
+        width: 250px; /* عرض الشعار */
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    h1 {
+        color: #4caf50; /* اللون الأخضر من الشعار */
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    p {
+        color: #4caf50; /* اللون الأخضر من الشعار */
+        font-size: 18px;
+    }
+    
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+    
+    button {
+        background-color: #4caf50; /* اللون الأخضر من الشعار */
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+    
+    button:hover {
+        background-color: #45a049; /* تغيير اللون عند المرور على الزر */
+    }
+    
+    /* أسفل الصفحة */
+    .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+        color: #333;
+    }
+    
+    .footer a {
+        color: #000000;
+        text-decoration: none;
+    }
+    
+    .footer a:hover {
+        text-decoration: underline;
+    }
+    
+    /* النص في أسفل القائمة */
+    .footer-small-text {
+        font-size: 12px;
+        color: #888;
+        margin-top: 10px;
+    }
+    
+    /* الخلفية المظلمة */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* الظلام الخفيف */
+        z-index: 999;
+        display: none;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    /* رسائل النجاح والخطأ */
+    .success-message, .error-message {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .message-content p {
+        font-size: 18px;
+        margin: 15px 0;
+    }
+    
+    .check-icon, .error-icon {
+        font-size: 50px;
+        display: block;
+        margin-bottom: 15px;
+        opacity: 0;
+        animation: drawIcon 1s forwards;
+    }
+    
+    @keyframes drawIcon {
+        from {
+            opacity: 0;
+            transform: scale(0);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* زر "حسناً" */
+    button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+    /* الرسالة الناجحة */
+    .success-message {
+        border-left: 5px solid green;
+    }
+    
+    /* رسالة الخطأ */
+    .error-message {
+        border-left: 5px solid red;
+    }
+    
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column; /* جعل المحتوى عموديًا */
+}
+
+/* الخلفية المظلمة */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* الظلام الخفيف */
+    z-index: 999;
+    display: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* رسائل النجاح والخطأ */
+.success-message, .error-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.message-content p {
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.check-icon, .error-icon {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: drawIcon 1s forwards;
+}
+
+@keyframes drawIcon {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* زر "حسناً" */
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* الرسالة الناجحة */
+.success-message {
+    border-left: 5px solid green;
+}
+
+/* رسالة الخطأ */
+.error-message {
+    border-left: 5px solid red;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .textbox {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .textbox input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .textbox input:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+        }
+
+        .textbox input:focus + .icon {
+            color: #2575fc;
+        }
+
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            transition: 0.3s;
+        }
+
+        .btn {
+            background: #2575fc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #1a5bb8;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .animation-container {
+            position: relative;
+        }
+
+        .animation-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            filter: blur(30px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                opacity: 0.4;
+            }
+            to {
+                opacity: 0.6;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container animation-container">
+        <h2>تسجيل الدخول</h2>
+        <form id="loginForm" action="login.php" method="POST">
+            <div class="textbox">
+                <i class="icon fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            </div>
+            <div class="textbox">
+                <i class="icon fas fa-lock"></i>
+                <input type="password" name="password" placeholder="كلمة المرور" required>
+            </div>
+            <button type="submit" class="btn">تسجيل الدخول</button>
+        </form>
+        <div id="error-message"></div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.style.display = 'none'; // إخفاء رسالة الخطأ بدايةً
+
+            const emailInput = document.querySelector('[name="email"]');
+            const passwordInput = document.querySelector('[name="password"]');
+
+            if (!emailInput.value || !passwordInput.value) {
+                event.preventDefault(); // منع الإرسال
+                errorDiv.textContent = 'يرجى ملء جميع الحقول!';
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
